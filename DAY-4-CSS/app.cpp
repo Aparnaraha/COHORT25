@@ -1,42 +1,45 @@
 
+#include<iostream>
 
-#include <bits>
 
-void strassen(int A[], int B[])
-{
-  if (len(A) == 1 && len(B) == 1)
-    return A * B;
 
-  int A11 = A[0][0], A12 = A[0][1], A21 = A[1][0], A22 = A[1][1];
-  int B11 = B[0][0], B12 = B[0][1], B21 = B[1][0], B22 = B[1][1];
-
-  int P, Q, R, S, T, U, V;
-
-  // Calculate P = (A11 + A22) * (B11 + B22)
-  P = (A11 + A22) * (B11 + B22);
-
-  // Calculate Q = (A21 + A22) * B11
-  Q = (A21 + A22) * B11;
-
-  // Calculate R = A11 * (B12 - B22)
-  R = A11 * (B12 - B22);
-
-  // Calculate S = A22 * (B21 - B11)
-  S = A22 * (B21 - B11);
-
-  // Calculate T = (A11 + A12) * B22
-  T = (A11 + A12) * B22;
-
-  // Calculate U = (A21 - A11) * (B11 + B12)
-  U = (A21 - A11) * (B11 + B12);
-
-  // Calculate V = (A12 - A22) * (B21 + B22)
-  V = (A12 - A22) * (B21 + B22);
-
-  // Calculate the resulting matrix C
-  C[0][0] = P + S - T + V;
-  C[0][1] = R + T;
-  C[1][0] = Q + S;
-  C[1][1] = P + R - Q + U;
+int knapsack(int W, int weight[], int profit[], int n) {
+    int dp[n+1][W+1];
+    
+    // Build the table in bottom-up manner
+    for (int i = 0; i <= n; i++) {
+        for (int w = 0; w <= W; w++) {
+            if (i == 0 || w == 0)
+                dp[i][w] = 0;
+            else if (weight[i-1] <= w)
+                dp[i][w] = max(profit[i-1] + dp[i-1][w-weight[i-1]], dp[i-1][w]);
+            else
+                dp[i][w] = dp[i-1][w];
+        }
+    }
+    return dp[n][W];  // Maximum profit
 }
 
+
+
+bool compare(Item a, Item b) {
+    return ((double)a.profit / a.weight) > ((double)b.profit / b.weight);
+}
+
+double fractionalKnapsack(int capacity, Item items[], int n) {
+    sort(items, items + n, compare);  // Sort by profit-to-weight ratio
+
+    double totalProfit = 0;
+    
+    for (int i = 0; i < n; i++) {
+        if (capacity == 0) break;
+        if (items[i].weight <= capacity) {
+            totalProfit += items[i].profit;
+            capacity -= items[i].weight;
+        } else {
+            totalProfit += items[i].profit * ((double)capacity / items[i].weight);
+            break;
+        }
+    }
+    return totalProfit;
+}
