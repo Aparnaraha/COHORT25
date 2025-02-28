@@ -22,24 +22,33 @@ int knapsack(int W, int weight[], int profit[], int n) {
 
 
 
+// Structure to represent an item
+struct Item {
+    int profit, weight;
+};
+
+// Function to calculate profit-to-weight ratio
 bool compare(Item a, Item b) {
-    return ((double)a.profit / a.weight) > ((double)b.profit / b.weight);
+    return (double)a.profit / a.weight > (double)b.profit / b.weight;
 }
 
-double fractionalKnapsack(int capacity, Item items[], int n) {
-    sort(items, items + n, compare);  // Sort by profit-to-weight ratio
-
-    double totalProfit = 0;
+double fractionalKnapsack(int capacity, vector<Item>& items) {
+    sort(items.begin(), items.end(), compare);
     
-    for (int i = 0; i < n; i++) {
-        if (capacity == 0) break;
-        if (items[i].weight <= capacity) {
-            totalProfit += items[i].profit;
-            capacity -= items[i].weight;
+    double totalProfit = 0.0;  // Total profit accumulated in the knapsack
+    int currentWeight = 0;
+    
+    for (auto& item : items) {
+        if (currentWeight + item.weight <= capacity) {
+            // Take the whole item
+            currentWeight += item.weight;
+            totalProfit += item.profit;
         } else {
-            totalProfit += items[i].profit * ((double)capacity / items[i].weight);
-            break;
+            // Take the fraction of the item that fits
+            int remainingWeight = capacity - currentWeight;
+            totalProfit += item.profit * ((double)remainingWeight / item.weight);
+            break;  // Knapsack is full
         }
-    }
-    return totalProfit;
+    }    
+    return totalProfit;  // Return the maximum profit
 }
