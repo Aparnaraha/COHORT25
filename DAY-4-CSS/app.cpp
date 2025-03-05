@@ -1,54 +1,35 @@
 
-#include<iostream>
 
 
-
-int knapsack(int W, int weight[], int profit[], int n) {
-    int dp[n+1][W+1];
+Algorithm HuffmanCoding(data):
+    1. Create a frequency table for the characters in the data
+        For each character in data:
+            Count how often each character appears
     
-    // Build the table in bottom-up manner
-    for (int i = 0; i <= n; i++) {
-        for (int w = 0; w <= W; w++) {
-            if (i == 0 || w == 0)
-                dp[i][w] = 0;
-            else if (weight[i-1] <= w)
-                dp[i][w] = max(profit[i-1] + dp[i-1][w-weight[i-1]], dp[i-1][w]);
-            else
-                dp[i][w] = dp[i-1][w];
-        }
-    }
-    return dp[n][W];  // Maximum profit
-}
-
-
-
-// Structure to represent an item
-struct Item {
-    int profit, weight;
-};
-
-// Function to calculate profit-to-weight ratio
-bool compare(Item a, Item b) {
-    return (double)a.profit / a.weight > (double)b.profit / b.weight;
-}
-
-double fractionalKnapsack(int capacity, vector<Item>& items) {
-    sort(items.begin(), items.end(), compare);
+    2. Create a priority queue (min-heap) to store nodes
+        For each character and its frequency:
+            Create a node with the character and its frequency
+            Insert the node into the priority queue
     
-    double totalProfit = 0.0;  // Total profit accumulated in the knapsack
-    int currentWeight = 0;
+    3. Build the Huffman Tree
+        While the priority queue has more than one node:
+            a. Extract the two nodes with the smallest frequencies
+            b. Create a new internal node with the sum of the two frequencies
+               Set the two nodes as the left and right children of the new node
+            c. Insert the new internal node back into the priority queue
     
-    for (auto& item : items) {
-        if (currentWeight + item.weight <= capacity) {
-            // Take the whole item
-            currentWeight += item.weight;
-            totalProfit += item.profit;
-        } else {
-            // Take the fraction of the item that fits
-            int remainingWeight = capacity - currentWeight;
-            totalProfit += item.profit * ((double)remainingWeight / item.weight);
-            break;  // Knapsack is full
-        }
-    }    
-    return totalProfit;  // Return the maximum profit
-}
+    4. Generate Huffman Codes
+        Initialize an empty dictionary for Huffman codes
+        Traverse the Huffman tree from the root:
+            For each leaf node:
+                Assign the path from root to the leaf (using '0' for left and '1' for right) as the code for that character
+    
+    5. Encode the Data
+        For each character in the input data:
+            Replace it with its corresponding Huffman code
+    
+    6. Return the Encoded Data and Huffman Codes
+        Print the Huffman codes for each character
+        Print the encoded data
+    
+End Algorithm
