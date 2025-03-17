@@ -18,4 +18,13 @@ MATRIX_CHAIN_ORDER(p)
   return m and s
 
 
+PRINT_OPTIMAL_PARENS(s, i, j)
+  if i == j:
+      Print "A" + i
+  else:
+      Print "("
+      PRINT_OPTIMAL_PARENS(s, i, s[i][j])
+      PRINT_OPTIMAL_PARENS(s, s[i][j] + 1, j)
+      Print ")"
+
 
