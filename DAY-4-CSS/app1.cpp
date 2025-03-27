@@ -1,23 +1,13 @@
-function FloydWarshall(graph):
-    n = number of nodes in graph
-    dist = matrix of size n x n
+Function Knapsack(weights[], values[], W, n):
+    Create 2D array dp[n+1][W+1]
 
-    // Step 1: Initialize the distance matrix
-    for i = 1 to n:
-        for j = 1 to n:
-            if i == j:
-                dist[i][j] = 0       // Distance from node to itself is 0
-            else if there is an edge from i to j:
-                dist[i][j] = weight of edge from i to j
-            else:
-                dist[i][j] = ∞       // No edge, set distance to infinity
+    For i = 0 to n:
+        For w = 0 to W:
+            If i == 0 or w == 0:
+                dp[i][w] = 0
+            Else If weight[i-1] <= w:
+                dp[i][w] = max(dp[i-1][w], values[i-1] + dp[i-1][w - weights[i-1]])
+            Else:
+                dp[i][w] = dp[i-1][w]
 
-    // Step 2: Update the distance matrix
-    for k = 1 to n:              // For each intermediate node k
-        for i = 1 to n:          // For each source node i
-            for j = 1 to n:      // For each destination node j
-                if dist[i][j] > dist[i][k] + dist[k][j]:
-                    dist[i][j] = dist[i][k] + dist[k][j]  // Update the shortest distance
-
-    return dist   // Return the matrix with the shortest distances between all pairs of nodes
-
+    Return dp[n][W]
