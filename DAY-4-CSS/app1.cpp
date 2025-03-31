@@ -1,26 +1,21 @@
-Function TSP(dist[][], n):
-    Create 2D array T[2^n][n]
-    
-    For i = 0 to 2^n - 1:
-        For j = 0 to n - 1:
-            T[i][j] = infinity  # Initialize all values to infinity
+Function OptimalBST(keys[], freq[], n):
+    Create 2D arrays cost[n][n] and root[n][n]
 
-    T[1][0] = 0  # Starting at city 0 with only city 0 visited
+    For i = 0 to n-1:
+        cost[i][i] = freq[i]  # Base case: only one key
 
-    For visited_set = 1 to 2^n - 1:  # Iterate over all subsets of cities
-        For u = 0 to n - 1:  # End city u in the current visited_set
-            If (visited_set & (1 << u)) == 0:
-                Continue  # Skip if city u is not in the visited_set
+    For length = 2 to n:
+        For i = 0 to n - length:
+            j = i + length - 1
+            cost[i][j] = infinity
+            For r = i to j:
+                # Calculate cost of making keys[r] the root
+                cost_left = (r > i) ? cost[i][r-1] : 0
+                cost_right = (r < j) ? cost[r+1][j] : 0
+                total_cost = cost_left + cost_right + sum(freq[i..j])  # Sum of frequencies
 
-            For v = 0 to n - 1:  # Try to extend to city v
-                If (visited_set & (1 << v)) != 0:
-                    Continue  # Skip if city v is already visited
+                If total_cost < cost[i][j]:
+                    cost[i][j] = total_cost
+                    root[i][j] = r
 
-                new_visited_set = visited_set | (1 << v)
-                T[new_visited_set][v] = min(T[new_visited_set][v], T[visited_set][u] + dist[u][v])
-
-    min_cost = infinity
-    For u = 1 to n - 1:
-        min_cost = min(min_cost, T[2^n - 1][u] + dist[u][0])  # Return to the starting city
-
-    Return min_cost
+    Return cost[0][n-1]  # Minimum cost for the full range
