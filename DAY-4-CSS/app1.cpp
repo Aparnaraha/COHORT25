@@ -1,26 +1,16 @@
-Function TSP(dist[][], n):
-    Create 2D array T[2^n][n]
+Function MultistageGraph(n, edges, source, destination):
+    Create an array D[n]  // Array to store the shortest distance from the source to each node
     
-    For i = 0 to 2^n - 1:
-        For j = 0 to n - 1:
-            T[i][j] = infinity  # Initialize all values to infinity
+    For i = 0 to n - 1:
+        D[i] = infinity  // Initialize all distances to infinity
+    
+    D[source] = 0  // Distance to the source node is 0
 
-    T[1][0] = 0  # Starting at city 0 with only city 0 visited
+    For stage = n - 2 down to 0:  // Start from the second last stage to the first stage
+        For each node u in stage:  // Iterate through each node in the current stage
+            min_distance = infinity
+            For each (neighbor, weight) in edges[stage][u]:  // For each outgoing edge from node u
+                min_distance = min(min_distance, D[neighbor] + weight)    //Calculate the shortest path
+            D[u] = min_distance  // Update the shortest distance for node u
 
-    For visited_set = 1 to 2^n - 1:  # Iterate over all subsets of cities
-        For u = 0 to n - 1:  # End city u in the current visited_set
-            If (visited_set & (1 << u)) == 0:
-                Continue  # Skip if city u is not in the visited_set
-
-            For v = 0 to n - 1:  # Try to extend to city v
-                If (visited_set & (1 << v)) != 0:
-                    Continue  # Skip if city v is already visited
-
-                new_visited_set = visited_set | (1 << v)
-                T[new_visited_set][v] = min(T[new_visited_set][v], T[visited_set][u] + dist[u][v])
-
-    min_cost = infinity
-    For u = 1 to n - 1:
-        min_cost = min(min_cost, T[2^n - 1][u] + dist[u][0])  # Return to the starting city
-
-    Return min_cost
+    Return D[destination]  // Return the shortest distance to the destination node
