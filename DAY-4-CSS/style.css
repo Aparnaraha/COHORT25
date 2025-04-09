@@ -1,0 +1,40 @@
+body{
+  background-color: black;
+  font-family: 'helvetica';
+  font-style:normal;
+
+}
+
+h1{
+  color: red;
+  font-weight: 100;
+}
+
+.para{
+  color:antiquewhite;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  word-spacing: 10px;
+  text-align: justify;
+  text-transform: capitalize;
+  text-decoration: none;
+  text-indent: 10px;
+  text-shadow: 20px 20px 20px white;
+}
+#div1{
+  /* background-color: rgb(255, 132, 0); */
+  background-image: url("https://images.unsplash.com/photo-1632073588808-00eda958894a?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDJ8fHxlbnwwfHx8fHw%3D");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 500px;
+  width: 500px;
+  margin: 10px;
+  padding: 10px;
+  border: 2px solid white;
+  box-sizing: border-box;
+  outline: 2px solid red; /* outline is used to set the outline of the element. */
+  outline-offset: 2px; /* outline-offset is used to set the offset of the outline. */
+  border-radius: 50px 100px 150px 200px; /* border-radius is used to set the radius of the border. */
+}
