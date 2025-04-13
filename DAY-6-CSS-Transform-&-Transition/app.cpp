@@ -1,9 +1,4 @@
 
-
-
-
-
-
 function knapsack(i, currentWeight, currentProfit):
     if currentWeight > capacity:
         return
