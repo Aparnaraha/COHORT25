@@ -59,3 +59,20 @@ let c = 11;
 c > 10 ? console.log("greater") : console.log("lesser")
 */
 
+let a =0;
+
+while (a < 10) {
+    console.log("while loop", a)
+    a++;
+}
+
+
+for (let i = 0; i < 10; i++) {
+    console.log("for loop", i)
+}
+
+for ( let i = 10; i > 0; i--) {
+    console.log("reverse for loop", i)
+}
+
+console.log(typeof NaN)
