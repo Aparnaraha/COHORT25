@@ -67,18 +67,3 @@ div.addEventListener("mouseover", () => {
     console.log("mouseover");
 })
 
-div.addEventListener("mouseout", () => {
-    console.log("mouseout");
-})
-
-div.addEventListener("mousemove", () => {
-    console.log("mousemove");
-})
-
-div.addEventListener("dblclick", () => {
-    console.log("dblclick");
-})
-
-document.body.addEventListener("keypress", (e) => {
-    console.log(e.key);
-})
