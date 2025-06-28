@@ -12,17 +12,23 @@
 
 import React, { useState } from 'react'
 
-const [users, setusers] = useState(
-  [
-    {name:'john', age:12}
-    {name:'mohn', age:22}
-    {name:'rohn', age:14}
-  ]
-)
-
 const App = () => {
+  const [users, setUsers] = useState([
+    { name: 'john', age: 12 },
+    { name: 'mohn', age: 22 },
+    { name: 'rohn', age: 14 }
+  ])
+
   return (
-    <div>App</div>
+    <div>
+      <h1>User List</h1>
+      {users.map((user, index) => (
+        <div key={index}>
+          <p>Name: {user.name}</p>
+          <p>Age: {user.age}</p>
+        </div>
+      ))}
+    </div>
   )
 }
 
