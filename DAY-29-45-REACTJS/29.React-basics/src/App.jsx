@@ -12,6 +12,7 @@
 
 import React, { useState } from 'react'
 
+
 const App = () => {
   const [users, setUsers] = useState([
     { name: 'john', age: 12 },
@@ -27,14 +28,14 @@ const App = () => {
 
   return (
     <div>
-      <h1>User List</h1>
+      <h1 className="text-3xl font-bold underline">User List</h1>
 
       {users.map((user, index) => (
         <div key={index}>
           <p>Name: {user.name}</p>
           <p>Age: {user.age}</p>
         </div>
-      ))}
+      ))} 
 
       <button onClick={addUser}>Add User</button>
     </div>
