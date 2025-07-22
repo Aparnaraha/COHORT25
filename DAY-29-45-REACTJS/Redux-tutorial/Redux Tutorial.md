@@ -61,12 +61,12 @@ A **store** is the single source of truth that holds your app’s state.
 
 ### 📍 Where
 
-Create `src/app/store.js`
+Create `src/store/store.jsx`
 
 ### ⚙️ How to Implement
 
-```js
-// src/app/store.js
+```jsx
+// src/store/store.jsx
 import { configureStore } from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 
@@ -96,12 +96,12 @@ A **slice** is a piece of Redux state + its logic. It includes:
 
 ### 📍 Where
 
-Create `src/features/counter/counterSlice.js`
+Create `src/features/counter/counterSlice.jsx`
 
 ### ⚙️ How to Implement
 
-```js
-// src/features/counter/counterSlice.js
+```jsx
+// src/features/counter/counterSlice.jsx
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = { value: 0 };
@@ -137,12 +137,12 @@ Wrap your app with Redux’s `<Provider>` to make the store accessible throughou
 
 ### 📍 Where
 
-Edit `src/index.js`
+Edit `src/index.jsx`
 
 ### ⚙️ How to Implement
 
-```js
-// src/index.js
+```jsx
+// src/index.jsx
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
@@ -168,12 +168,12 @@ ReactDOM.render(
 
 ### 📍 Where
 
-Create `src/features/counter/Counter.js`
+Create `src/features/counter/Counter.jsx`
 
 ### ⚙️ How to Implement
 
-```js
-// src/features/counter/Counter.js
+```jsx
+// src/features/counter/Counter.jsx
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { increment, decrement, incrementByAmount } from './counterSlice';
@@ -201,10 +201,10 @@ export default Counter;
 
 ### 📍 Where
 
-Edit `src/App.js`
+Edit `src/App.jsx`
 
-```js
-// src/App.js
+```jsx
+// src/App.jsx
 import React from 'react';
 import Counter from './features/counter/Counter';
 
@@ -230,12 +230,12 @@ Use `createAsyncThunk` for async operations (e.g. fetch, POST).
 
 ### 📍 Where
 
-Update your slice file (e.g. `postsSlice.js` or `userSlice.js`)
+Update your slice file (e.g. `postsSlice.jsx` or `userSlice.jsx`)
 
 ### ⚙️ Example: Fetch Posts from API
 
-```js
-// src/features/posts/postsSlice.js
+```jsx
+// src/features/posts/postsSlice.jsx
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 export const fetchPosts = createAsyncThunk('posts/fetchPosts', async () => {
@@ -292,16 +292,16 @@ No setup needed if using `configureStore()` — it enables DevTools automaticall
 
 ```
 src/
-├── app/
-│   └── store.js
+├── store/
+│   └── store.jsx
 ├── features/
 │   └── featureName/
-│       ├── FeatureComponent.js
-│       └── featureSlice.js
+│       ├── FeatureComponent.jsx
+│       └── featureSlice.jsx
 ├── components/
-│   └── SharedComponent.js
-├── App.js
-└── index.js
+│   └── SharedComponent.jsx
+├── App.jsx
+└── index.jsx
 ```
 
 ---
@@ -315,15 +315,15 @@ src/
 | Dispatch    | Trigger actions            | `useDispatch()`      |
 | Selector    | Read state                 | `useSelector()`      |
 | Async Thunk | Handle async logic         | `createAsyncThunk()` |
-| Provider    | Connect store to React     | `<Provider>`         |
+| Provider    | Connect store to React     | `<Provider>`   
 
 ---
 
 ## 📚 Recommended Reading
 
-* [Redux Toolkit Docs](https://redux-toolkit.js.org/)
-* [Redux Fundamentals](https://redux.js.org/tutorials/fundamentals)
-* [RTK Best Practices](https://redux.js.org/style-guide/style-guide)
+* [Redux Toolkit Docs](https://redux-toolkit.jsx.org/)
+* [Redux Fundamentals](https://redux.jsx.org/tutorials/fundamentals)
+* [RTK Best Practices](https://redux.jsx.org/style-guide/style-guide)
 
 ---
 
