@@ -1,5 +1,7 @@
 import { useState } from "react";
-
+import { Routes, Route } from "react-router-dom";
+import Home from "./components/Home";
+import About from "./components/About";
 
 const App = () => {
   const [username, setUsername] = useState("John Doe");
@@ -11,13 +13,16 @@ const App = () => {
 
   return (
     <div>
-      <h1 className="text-3xl font-medium ">Username</h1>
-      <h2 className="m-2 p-2">{username}</h2>
-      <button className="bg-transparent hover:bg-blue-500 text-blue-700 font-semibold hover:text-white px-4 py-2 border border-blue-500 hover:border-transparent rounded shadow" onClick={AdduserName}>
-        Add User  
-      </button>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/about" element={<About />} />
+      </Routes>
     </div>
   );
 };
 
 export default App;
+
+
+
+
